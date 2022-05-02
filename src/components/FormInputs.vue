@@ -15,7 +15,7 @@
         :label="input.label"
         :type="input.type"
         :isValid="input.isFilled && input.isCorrectlyFilled"
-        @change-value="changeInputValue($event, input.id)"
+        @change-value="changeFieldValue($event, input.id)"
       />
     </div>
   </form>
@@ -79,8 +79,8 @@ export default {
   },
 
   methods: {
-    changeInputValue(value, inputId) {
-      this.form[inputId] = value;
+    changeFieldValue(value, fieldId) {
+      this.form[fieldId] = value;
     },
 
     onSubmitForm() {
