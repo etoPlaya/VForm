@@ -3,6 +3,7 @@
     <FormInputs />
     <FormTextarea />
     <FormSelect />
+    <FormCheckbox />
   </div>
 </template>
 
@@ -10,6 +11,7 @@
 import FormInputs from '@/components/FormInputs';
 import FormTextarea from '@/components/FormTextarea';
 import FormSelect from '@/components/FormSelect';
+import FormCheckbox from '@/components/FormCheckbox';
 
 export default { 
   name: 'Index',
@@ -17,6 +19,7 @@ export default {
     FormInputs,
     FormTextarea,
     FormSelect,
+    FormCheckbox,
   },
 }
 </script>

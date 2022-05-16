@@ -1,5 +1,6 @@
 1. Сделать VInput (validate & label & required) - DONE
 2. Сделать VTextarea - DONE
 3. Сделать VSelect (arrow nav & blur) - DONE
-4. Сделать VCheckbox
-5. Сделать Example Form (Inputs & Textarea & Select & Checkbox & Submit Example)
+4. Сделать VCheckbox - DONE
+5. Сделать VButton
+6. Сделать Example Form (Inputs & Textarea & Select & Checkbox & Submit Example)
