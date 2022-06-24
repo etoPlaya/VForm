@@ -4,10 +4,9 @@
     class="v-form" 
   >
     <VTextarea 
-      :value="form[textarea.id]"
+      v-model="form[textarea.id]"
       :placeholder="textarea.placeholder"
       :label="textarea.label"
-      @change-value="changeFieldValue($event, textarea.id)"
     />
   </form>
 </template>
@@ -35,15 +34,5 @@ export default {
       }
     },
   },
-
-  methods: {
-    changeFieldValue(value, fieldId) {
-      this.form[fieldId] = value;
-    },
-  },
 }
 </script>
-
-<style lang="scss" scoped>
-
-</style>

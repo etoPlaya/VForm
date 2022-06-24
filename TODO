@@ -2,5 +2,7 @@
 2. Сделать VTextarea - DONE
 3. Сделать VSelect (arrow nav & blur) - DONE
 4. Сделать VCheckbox - DONE
-5. Сделать VButton
-6. Сделать Example Form (Inputs & Textarea & Select & Checkbox & Submit Example)
+5. Сделать VButton - DONE
+6. Сделать Examples Form (Inputs & Textarea & Select & Checkbox & Submit Examples)
+7. Перевести большенство компонентов на v-model - DONE
+8. Сделать VRadio

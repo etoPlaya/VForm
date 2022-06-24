@@ -1,11 +1,11 @@
 <template>
   <button 
-    :to="to"
-    :is="tag"
     v-bind="$attrs"
     v-on="$listeners"
+    :to="to"
+    :is="tag"
     :class="[
-      `v-button__${buttonColor}`,
+      `v-button_${buttonColor}`,
     ]"
     class="v-button"
     @mousedown.prevent
@@ -36,7 +36,3 @@ export default {
   },
 }
 </script>
-
-<style lang="scss" scoped>
-
-</style>

@@ -1,7 +1,7 @@
 <template>
   <div 
-    class="v-select"
     v-click-outside="setBlur"
+    class="v-select"
   >
     <div 
       class="v-select__header"
@@ -37,9 +37,10 @@ export default {
     IconArrow,
   },
 
-  data: () => ({
-    isActive: false,
-  }),
+  model: {
+    prop: 'value',
+    event: 'change',
+  },
   props: {
     placeholder: {
       type: String,
@@ -54,6 +55,9 @@ export default {
       required: true,
     },
   },
+  data: () => ({
+    isActive: false,
+  }),
   computed: {
     model: {
       get() {
@@ -66,7 +70,7 @@ export default {
           : this.options[0].title;
       },
       set(value) {
-        return this.$emit('change-value', value);
+        return this.$emit('change', value);
       },
     },
     sortingOptions() {
@@ -92,7 +96,7 @@ export default {
   },
 
   created() {
-    this.placeholder ? null : this.$emit('change-value', this.options[0].value);
+    this.placeholder ? null : this.$emit('change', this.options[0].value);
   },
   mounted() {
     this.initKeyboardsHelper();
@@ -137,9 +141,5 @@ export default {
 <style lang="scss" scoped>
 .v-select__header {
   cursor: pointer;
-}
-
-.v-select__option_active {
-  background-color: #eee;
 }
 </style>

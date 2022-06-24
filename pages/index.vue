@@ -9,11 +9,11 @@
 </template>
 
 <script>
-import FormInputs from '@/components/FormInputs';
-import FormTextarea from '@/components/FormTextarea';
-import FormSelect from '@/components/FormSelect';
-import FormCheckbox from '@/components/FormCheckbox';
-import FormButton from '@/components/FormButton';
+import FormInputs from '@/components/Examples/FormInputs';
+import FormTextarea from '@/components/Examples/FormTextarea';
+import FormSelect from '@/components/Examples/FormSelect';
+import FormCheckbox from '@/components/Examples/FormCheckbox';
+import FormButton from '@/components/Examples/FormButton';
 
 export default { 
   name: 'Index',
@@ -26,7 +26,3 @@ export default {
   },
 }
 </script>
-
-<style lang="scss" scoped>
-
-</style>

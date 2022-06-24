@@ -1,19 +1,5 @@
 # VForm
 
-## Project setup
-```
-npm install
-```
+## Пример подключение каждого компонента описан в **components/Examples/***
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+## Компонент VSelect нуждается в обязательном пакете [v-ckick-outside]:https://www.npmjs.com/package/v-click-outside
