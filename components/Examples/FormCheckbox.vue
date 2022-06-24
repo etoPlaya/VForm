@@ -4,9 +4,8 @@
     class="v-form" 
   >
     <VCheckbox 
-      :value="form[checkbox.id]"
+      :checked="form[checkbox.id]"
       :label="checkbox.label"
-      @change-value="changeFieldValue($event, checkbox.id)"
     />
   </form>
 </template>
@@ -30,18 +29,8 @@ export default {
       return {
         id: 'checkboxChecked',
         label: 'Согласитесь написано странно',
-      }
-    },
-  },
-
-  methods: {
-    changeFieldValue(value, fieldId) {
-      this.form[fieldId] = value;
+      };
     },
   },
 }
 </script>
-
-<style lang="scss" scoped>
-
-</style>

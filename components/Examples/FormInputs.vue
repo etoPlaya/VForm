@@ -10,12 +10,12 @@
       class="v-form__section"
     >
       <VInput 
-        :value="form[input.id]"
+        v-model="form[input.id]"
         :placeholder="input.placeholder"
         :label="input.label"
         :type="input.type"
-        :isValid="input.isFilled && input.isCorrectlyFilled"
-        @change-value="changeFieldValue($event, input.id)"
+        :errors="input.errors"
+        :isValid="input.isFilled && input.isCorrectly"
       />
     </div>
   </form>
@@ -25,6 +25,7 @@
 import VInput from '@/components/UI/VInput';
 
 import { validateRegex } from '@/utils/inputsValidateRegex';
+import { ERROR_NAMES } from '@/utils/const/inputsErrors';
 
 export default { 
   name: 'FormInputs',
@@ -48,7 +49,11 @@ export default {
           placeholder: 'Имя',
           label: 'Ввидите имя',
           isFilled: Boolean(this.form.name),
-          isCorrectlyFilled: Boolean(validateRegex.name.test(this.form.name)),
+          isCorrectly: Boolean(validateRegex.name.test(this.form.name)),
+          errors: [
+            Boolean(this.form.name) ? '' : ERROR_NAMES.NOT_FILLED,
+            Boolean(this.form.name) && !Boolean(validateRegex.name.test(this.form.name)) ? ERROR_NAMES.NOT_CORRECTLY : '',
+          ],
           required: true, // Не нужно указывать если все инпуты обязательны
         },
         {
@@ -57,7 +62,11 @@ export default {
           label: 'Ввидите телефон',
           type: 'phone',
           isFilled: Boolean(this.form.phone),
-          isCorrectlyFilled: Boolean(validateRegex.phone.test(this.form.phone)),
+          isCorrectly: Boolean(validateRegex.phone.test(this.form.phone)),
+          errors: [
+            Boolean(this.form.phone) ? '' : ERROR_NAMES.NOT_FILLED,
+            Boolean(this.form.phone) && !Boolean(validateRegex.phone.test(this.form.phone)) ? ERROR_NAMES.NOT_CORRECTLY : '',
+          ],
           required: true, // Не нужно указывать если все инпуты обязательны
         },
         {
@@ -66,7 +75,11 @@ export default {
           label: 'Ввидите email',
           type: 'email',
           isFilled: Boolean(this.form.email),
-          isCorrectlyFilled: Boolean(validateRegex.email.test(this.form.email)),
+          isCorrectly: Boolean(validateRegex.email.test(this.form.email)),
+          errors: [
+            Boolean(this.form.email) ? '' : ERROR_NAMES.NOT_FILLED,
+            Boolean(this.form.email) && !Boolean(validateRegex.email.test(this.form.email)) ? ERROR_NAMES.NOT_CORRECTLY : '',
+          ],
           required: true, // Не нужно указывать если все инпуты обязательны
         },
         {
@@ -79,23 +92,15 @@ export default {
   },
 
   methods: {
-    changeFieldValue(value, fieldId) {
-      this.form[fieldId] = value;
-    },
-
     onSubmitForm() {
       // Удалить если все инпуты обязательны
-      const requiredInputs = this.inputs.filter(input => input.required);
+      const requiredInputs = this.inputs.filter(input => input.required || input.isFilled || input.isCorrectly);
 
       // Если все инпуты обязательны изменить requiredInputs на this.inputs
-      if (requiredInputs.every(input => input.isFilled && input.isCorrectlyFilled)) {
+      if (requiredInputs.every(input => input.isFilled && input.isCorrectly)) {
         return console.log('Заполено корректно');
       }
     },
   },
 }
 </script>
-
-<style lang="scss" scoped>
-
-</style>

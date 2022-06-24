@@ -1,23 +1,27 @@
 <template>
-  <div
-    v-bind="$attrs"
-    v-on="$listeners"
-    :class="{ 'v-checkbox_checked': model }"
+  <label
+    :class="{ 'v-checkbox_checked': checked }"
     class="v-checkbox"
-    @click.prevent="model = !value"
   >
     <span  
       v-if="label"
-      v-once
       class="v-checkbox__label"
     >
       {{ label }}
     </span>
 
     <div class="v-checkbox__icon">
-      <IconCheck v-show="model" />
+      <IconCheck v-show="checked" />
     </div>
-  </div>
+
+    <input 
+      v-bind="$attrs"
+      :checked="checked"
+      type="checkbox"
+      class="v-checkbox__input"
+      @change="$emit('change', !checked)"
+    />
+  </label>
 </template>
 
 <script>
@@ -29,24 +33,18 @@ export default {
     IconCheck,
   },
 
+  model: {
+    prop: 'checked',
+    event: 'change',
+  },
   props: {
-    value: {
+    checked: {
       type: Boolean,
       required: true,
     },
     label: {
       type: String,
       default: null,
-    },
-  },
-  computed: {
-    model: {
-      get() {
-        return this.value;
-      },
-      set(value) {
-        return this.$emit('change-value', value);
-      },
     },
   },
 }

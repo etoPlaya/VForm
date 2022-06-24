@@ -2,29 +2,38 @@
   <label
     :class="[
       { 'v-input_focus': isFocused },
-      { 'v-input_error': !isValid && model && !isFocused }, // Введеное не валидно && Не пустой && Не в фокусе
+      { 'v-input_error': !isValid && value && !isFocused }, // Введеное не валидно && Не пустой && Не в фокусе
     ]" 
     class="v-input"
   >
     <span  
       v-if="label"
-      v-once
       class="v-input__label"
     >
       {{ label }}
     </span>
 
     <input 
-      v-model="model"
+      v-bind="$attrs"
+      :value="value"
       :placeholder="placeholder"
       :type="type"
-      v-bind="$attrs"
-      v-on="$listeners"
       autocomplete="off"
       class="v-input__field"
       @focus="isFocused = true"
       @blur="isFocused = false"
+      @input="$emit('input', $event.target.value)"
     />
+
+    <div class="v-input-errors">
+      <span
+        v-for="(error, index) in errors"
+        :key="index"
+        v-show="isDirty && !isFocused"
+      >
+        {{ error }}
+      </span>
+    </div>
   </label>
 </template>
 
@@ -32,6 +41,10 @@
 export default {
   name: 'VInput',
 
+  model: {
+    prop: 'value',
+    event: 'input',
+  },
   props: {
     value: {
       type: [String, Number],
@@ -50,6 +63,10 @@ export default {
       default: 'text',
       validator: val => ['text', 'email', 'phone', 'password'].includes(val),
     },
+    errors: {
+      type: Array,
+      default: () => [],
+    },
     isValid: {
       type: Boolean,
       default: true,
@@ -57,24 +74,12 @@ export default {
   },
   data: () => ({
     isFocused: false,
+    isDirty: false, // Значит, что инпут был в фокусе хоть раз
   }),
-  computed: {
-    model: {
-      get() {
-        return this.value;
-      },
-      set(value) {
-        return this.$emit('change-value', value);
-      },
+  watch: {
+    isFocused() {
+      this.isDirty = true;
     },
   },
 }
 </script>
-
-<style lang="scss" scoped>
-.v-input__field {
-  .v-input_error & {
-    border-color: red;
-  }
-}
-</style>

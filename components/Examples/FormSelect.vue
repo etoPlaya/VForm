@@ -4,10 +4,9 @@
     class="v-form" 
   >
     <VSelect
-      placeholder="Выберите значение"
-      :value="form.option"
+      v-model="form.option"
       :options="options"
-      @change-value="changeFieldValue($event, 'option')"
+      placeholder="Выберите значение"
     />
 
     {{ form.option }}
@@ -32,29 +31,19 @@ export default {
     options() {
       return [
         {
-          value: 1,
           title: 'value - 1',
+          value: 1,
         },
         {
-          value: 2,
           title: 'value - 2',
+          value: 2,
         },
         {
-          value: 3,
           title: 'value - 3',
+          value: 3,
         },
       ];
     },
   },
-
-  methods: {
-    changeFieldValue(value, fieldId) {
-      this.form[fieldId] = value;
-    },
-  },
 }
 </script>
-
-<style lang="scss" scoped>
-
-</style>
