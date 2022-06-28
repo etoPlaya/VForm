@@ -2,7 +2,7 @@
   <label
     :class="[
       { 'v-input_focus': isFocused },
-      { 'v-input_error': !isValid && value && !isFocused }, // Введеное не валидно && Не пустой && Не в фокусе
+      { 'v-input_error': hasErrors }, 
     ]" 
     class="v-input"
   >
@@ -29,7 +29,7 @@
       <span
         v-for="(error, index) in errors"
         :key="index"
-        v-show="isDirty && !isFocused"
+        v-show="hasBeenFocused && !isFocused"
       >
         {{ error }}
       </span>
@@ -74,11 +74,16 @@ export default {
   },
   data: () => ({
     isFocused: false,
-    isDirty: false, // Значит, что инпут был в фокусе хоть раз
+    hasBeenFocused: false, // Значит, что инпут был в фокусе хоть раз
   }),
+  computed: {
+    hasErrors() {
+      return !this.isValid && this.value && !this.isFocused; // Введеное не валидно && Не пустой && Не в фокусе
+    },
+  },
   watch: {
     isFocused() {
-      this.isDirty = true;
+      this.hasBeenFocused = true;
     },
   },
 }

@@ -74,24 +74,22 @@ export default {
       },
     },
     sortingOptions() {
-      // Если есть placeholder то он будет выбран по дефолту и будет внутри select
-      if (this.placeholder) {
-        const options = this.options.map(option => option);
-
-        options.unshift({
-          value: '',
-          title: this.placeholder,
-        });
-
-        return options;
+      if (!this.placeholder) {
+        return this.options;
       }
 
-      return this.options;
+      // Если есть placeholder то он будет выбран по дефолту и будет внутри select
+      const options = this.options.map(option => option);
+
+      options.unshift({
+        value: '',
+        title: this.placeholder,
+      });
+
+      return options;
     },
     indexSelectedOption() {
-      return this.sortingOptions.findIndex(option => {
-        return option.value === this.value;
-      });
+      return this.sortingOptions.findIndex(option => option.value === this.value);
     },
   },
 
@@ -115,15 +113,18 @@ export default {
     
     keyboardsHelper(event) {
       if (event.key === 'ArrowUp' && this.isActive && this.indexSelectedOption) {
-        return this.setModel(this.sortingOptions[this.indexSelectedOption - 1].value);
+        this.setModel(this.sortingOptions[this.indexSelectedOption - 1].value);
+        return;
       }
 
       if (event.key === 'ArrowDown' && this.isActive && this.indexSelectedOption !== this.options.length) {
-        return this.setModel(this.sortingOptions[this.indexSelectedOption + 1].value);
+        this.setModel(this.sortingOptions[this.indexSelectedOption + 1].value);
+        return;
       }
 
       if (event.key === 'Escape' && this.isActive || event.key === 'Enter' && this.isActive) {
-        return this.isActive = false;
+        this.isActive = false;
+        return;
       }
 
       return;

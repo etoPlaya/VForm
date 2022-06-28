@@ -30,7 +30,7 @@ export default {
       return {
         id: 'message',
         placeholder: 'Сообщение',
-        label: 'Ввидите сообщение',
+        label: 'Введите сообщение',
       }
     },
   },

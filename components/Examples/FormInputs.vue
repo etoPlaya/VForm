@@ -47,7 +47,7 @@ export default {
         {
           id: 'name',
           placeholder: 'Имя',
-          label: 'Ввидите имя',
+          label: 'Введите имя',
           isFilled: Boolean(this.form.name),
           isCorrectly: Boolean(validateRegex.name.test(this.form.name)),
           errors: [
@@ -59,7 +59,7 @@ export default {
         {
           id: 'phone',
           placeholder: 'Телефон',
-          label: 'Ввидите телефон',
+          label: 'Введите телефон',
           type: 'phone',
           isFilled: Boolean(this.form.phone),
           isCorrectly: Boolean(validateRegex.phone.test(this.form.phone)),
@@ -72,7 +72,7 @@ export default {
         {
           id: 'email',
           placeholder: 'Email',
-          label: 'Ввидите email',
+          label: 'Введите email',
           type: 'email',
           isFilled: Boolean(this.form.email),
           isCorrectly: Boolean(validateRegex.email.test(this.form.email)),
@@ -85,7 +85,7 @@ export default {
         {
           id: 'any',
           placeholder: 'Текст',
-          label: 'Ввидите текст',
+          label: 'Введите текст',
         },
       ];
     },
