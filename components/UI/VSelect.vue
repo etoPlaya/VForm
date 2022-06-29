@@ -94,7 +94,9 @@ export default {
   },
 
   created() {
-    this.placeholder ? null : this.$emit('change', this.options[0].value);
+    if (!this.placeholder) {
+      this.$emit('change', this.options[0].value);
+    }
   },
   mounted() {
     this.initKeyboardsHelper();
@@ -112,22 +114,22 @@ export default {
     },
     
     keyboardsHelper(event) {
-      if (event.key === 'ArrowUp' && this.isActive && this.indexSelectedOption) {
-        this.setModel(this.sortingOptions[this.indexSelectedOption - 1].value);
-        return;
-      }
+      if (this.isActive) {
+        if (event.key === 'ArrowUp' && this.indexSelectedOption) {
+          this.setModel(this.sortingOptions[this.indexSelectedOption - 1].value);
+          return;
+        }
 
-      if (event.key === 'ArrowDown' && this.isActive && this.indexSelectedOption !== this.options.length) {
-        this.setModel(this.sortingOptions[this.indexSelectedOption + 1].value);
-        return;
-      }
+        if (event.key === 'ArrowDown' && this.indexSelectedOption !== this.options.length) {
+          this.setModel(this.sortingOptions[this.indexSelectedOption + 1].value);
+          return;
+        }
 
-      if (event.key === 'Escape' && this.isActive || event.key === 'Enter' && this.isActive) {
-        this.isActive = false;
-        return;
+        if (event.key === 'Escape' || event.key === 'Enter') {
+          this.isActive = false;
+          return;
+        }
       }
-
-      return;
     },
     initKeyboardsHelper() {
       document.addEventListener('keydown', this.keyboardsHelper);

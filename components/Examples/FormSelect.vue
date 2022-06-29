@@ -8,8 +8,6 @@
       :options="options"
       placeholder="Выберите значение"
     />
-
-    {{ form.option }}
   </form>
 </template>
 
