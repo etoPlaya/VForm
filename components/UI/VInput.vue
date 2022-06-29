@@ -20,8 +20,8 @@
       :type="type"
       autocomplete="off"
       class="v-input__field"
-      @focus="isFocused = true"
-      @blur="isFocused = false"
+      @focus="onFocus"
+      @blur="onBlur"
       @input="$emit('input', $event.target.value)"
     />
 
@@ -81,9 +81,14 @@ export default {
       return !this.isValid && this.value && !this.isFocused; // Введеное не валидно && Не пустой && Не в фокусе
     },
   },
-  watch: {
-    isFocused() {
+  
+  methods: {
+    onFocus() {
+      this.isFocused = true;
       this.hasBeenFocused = true;
+    },
+    onBlur() {
+      this.isFocused = false;
     },
   },
 }
