@@ -1,5 +1,6 @@
 <template>
   <div 
+    v-if="options.length"
     v-click-outside="setBlur"
     class="v-select"
   >
@@ -74,7 +75,7 @@ export default {
       },
     },
     sortingOptions() {
-      if (!this.placeholder) {
+      if (!this.placeholder || !this.options.length) {
         return this.options;
       }
 
@@ -94,7 +95,7 @@ export default {
   },
 
   created() {
-    if (!this.placeholder) {
+    if (!this.placeholder && this.options.length) {
       this.$emit('change', this.options[0].value);
     }
   },
@@ -114,21 +115,20 @@ export default {
     },
     
     keyboardsHelper(event) {
-      if (this.isActive) {
-        if (event.key === 'ArrowUp' && this.indexSelectedOption) {
-          this.setModel(this.sortingOptions[this.indexSelectedOption - 1].value);
-          return;
-        }
+      if (!this.isActive) return;
 
-        if (event.key === 'ArrowDown' && this.indexSelectedOption !== this.options.length) {
-          this.setModel(this.sortingOptions[this.indexSelectedOption + 1].value);
-          return;
-        }
+      if (event.key === 'ArrowUp' && this.indexSelectedOption) {
+        this.setModel(this.sortingOptions[this.indexSelectedOption - 1].value);
+        return;
+      }
 
-        if (event.key === 'Escape' || event.key === 'Enter') {
-          this.isActive = false;
-          return;
-        }
+      if (event.key === 'ArrowDown' && this.indexSelectedOption !== this.options.length) {
+        this.setModel(this.sortingOptions[this.indexSelectedOption + 1].value);
+        return;
+      }
+
+      if (event.key === 'Escape' || event.key === 'Enter') {
+        this.isActive = false;
       }
     },
     initKeyboardsHelper() {

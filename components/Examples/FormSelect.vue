@@ -14,7 +14,7 @@
 <script>
 import VSelect from '@/components/UI/VSelect';
 
-export default { 
+export default {
   name: 'FormSelect',
   components: {
     VSelect,

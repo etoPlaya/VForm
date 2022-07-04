@@ -3,7 +3,7 @@
     novalidate
     class="v-form" 
   >
-    <VTextarea 
+    <VTextarea
       v-model="form[textarea.id]"
       :placeholder="textarea.placeholder"
       :label="textarea.label"

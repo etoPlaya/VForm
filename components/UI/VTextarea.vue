@@ -5,14 +5,14 @@
     ]" 
     class="v-textarea"
   >
-    <span  
+    <span
       v-if="label"
       class="v-textarea__label"
     >
       {{ label }}
     </span>
 
-    <input 
+    <textarea
       v-bind="$attrs"
       :value="value"
       :placeholder="placeholder"
